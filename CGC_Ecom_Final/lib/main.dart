@@ -1,4 +1,6 @@
 import 'package:cgc_ecom_final/model/ad_banner.dart';
+import 'package:cgc_ecom_final/model/category.dart';
+import 'package:cgc_ecom_final/model/product.dart';
 import 'package:cgc_ecom_final/route/app_page.dart';
 import 'package:cgc_ecom_final/route/app_route.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -14,6 +16,8 @@ void main() async {
   //register adapters
 
   Hive.registerAdapter(AdBannerAdapter());
+  Hive.registerAdapter(CategoryAdapter());
+  Hive.registerAdapter(ProductAdapter());
   runApp(const MyApp());
 }
 
