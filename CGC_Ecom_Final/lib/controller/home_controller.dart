@@ -1,6 +1,7 @@
 import 'package:cgc_ecom_final/model/ad_banner.dart';
 import 'package:cgc_ecom_final/model/category.dart';
 import 'package:cgc_ecom_final/model/product.dart';
+import 'package:cgc_ecom_final/service/local_service/local_ad_banner_service.dart';
 import 'package:cgc_ecom_final/service/remote_service/remote_banner_service.dart';
 import 'package:cgc_ecom_final/service/remote_service/remote_popular_category_service.dart';
 import 'package:cgc_ecom_final/service/remote_service/remote_popular_product_service.dart';
@@ -14,9 +15,12 @@ class HomeController extends GetxController{
   RxBool isBannerLoading = false.obs;
   RxBool isPopularCategoryLoading = false.obs;
   RxBool isPopularProductLoading = false.obs;
+  final LocalAdBannerService _localAdBannerService = LocalAdBannerService();
+
 
   @override
-  void onInit() {
+  void onInit() async {
+    await _localAdBannerService.init();
    getAdBanners();
    getPopularCategories();
    getPopularProducts();
@@ -26,9 +30,17 @@ class HomeController extends GetxController{
   void getAdBanners() async{
     try{
     isBannerLoading(true);
+    if(_localAdBannerService.getAdBanners().isNotEmpty){
+      //assigning local ad banners before call api
+      bannerList.assignAll(_localAdBannerService.getAdBanners());
+    }
+    //call api
     var result = await RemoteBannerService().get();
     if(result != null) {
+      //assign api result
       bannerList.assignAll(adBannerListFromJson(result.body));
+      //save api result to local db
+      _localAdBannerService.assignAllAdBanners(adBanners: adBannerListFromJson(result.body));
     }
     } finally{
       isBannerLoading(false);
