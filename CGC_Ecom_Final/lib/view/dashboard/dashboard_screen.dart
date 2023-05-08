@@ -1,5 +1,6 @@
 import 'package:cgc_ecom_final/controller/dashboard_controller.dart';
 import 'package:cgc_ecom_final/view/home/home_screen.dart';
+import 'package:cgc_ecom_final/view/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:get/get.dart';
@@ -11,14 +12,13 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<DashboardController>(
       builder: (controller) => Scaffold(
+        backgroundColor: Colors.grey.shade100,
         body: SafeArea (
           child: IndexedStack(
             index: controller.tabIndex,
             children: [
               const HomeScreen(),
-              Container(
-                color: Colors.red ,
-              ),
+            const ProductScreen(),
               Container(
                 color: Colors.blue,
               ),
