@@ -43,20 +43,20 @@ class PopularCategoryCard extends StatelessWidget {
           elevation: 8,
           shadowColor: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(10),
-          child: Shimmer.fromColors(child: Container(
+          child: Shimmer.fromColors(baseColor: Colors.grey.shade300, highlightColor: Colors.white, child: Container(
             width: 270,
             height: 140,
             decoration: BoxDecoration(
                 color: Colors.grey.shade300,
                 borderRadius: BorderRadius.circular(10)
             ),
-          ),baseColor: Colors.grey.shade300, highlightColor: Colors.white),
+          )),
         ),
         errorWidget: (context, url, error) => Material(
           elevation: 8,
           shadowColor: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(10),
-          child: Shimmer.fromColors(child: Container(
+          child: Shimmer.fromColors(baseColor: Colors.grey.shade300, highlightColor: Colors.white, child: Container(
             width: 270,
             height: 140,
             decoration: BoxDecoration(
@@ -69,7 +69,7 @@ class PopularCategoryCard extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-          ),baseColor: Colors.grey.shade300, highlightColor: Colors.white),
+          )),
         ),
       ),
     );

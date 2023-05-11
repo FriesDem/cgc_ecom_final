@@ -53,7 +53,7 @@ class _CarouselSliderViewState extends State<CarouselSliderView> {
                 shape: BoxShape.circle,
                 color: _currentIndex == index
                   ? const Color.fromRGBO(0, 0, 0, 0.9)
-                    : Color.fromRGBO(0, 0, 0, 0.4)
+                    : const Color.fromRGBO(0, 0, 0, 0.4)
               ),
             );
           }).toList(),
