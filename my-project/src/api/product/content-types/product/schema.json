@@ -16,7 +16,7 @@
       "type": "string",
       "required": true
     },
-    "ProImages": {
+    "image": {
       "type": "media",
       "multiple": true,
       "required": true,

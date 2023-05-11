@@ -24,7 +24,15 @@ class ProductScreen extends StatelessWidget {
                   if(productController.productList.isNotEmpty){
                     return ProductGrid(products: productController.productList);
                   } else {
-                    return const ProductLoadingGrid();
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/product_not_found.png'),
+                        const SizedBox(height: 10),
+                        const Text('Darn No Products Huh?')
+                      ],
+                    );
                   }
                 }
               })
