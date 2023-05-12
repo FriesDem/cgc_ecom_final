@@ -1,4 +1,6 @@
 import 'package:cgc_ecom_final/controller/dashboard_controller.dart';
+import 'package:cgc_ecom_final/view/account/account_screen.dart';
+import 'package:cgc_ecom_final/view/category/category_screen.dart';
 import 'package:cgc_ecom_final/view/home/home_screen.dart';
 import 'package:cgc_ecom_final/view/product/product_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +18,11 @@ class DashboardScreen extends StatelessWidget {
         body: SafeArea (
           child: IndexedStack(
             index: controller.tabIndex,
-            children: [
-              const HomeScreen(),
-            const ProductScreen(),
-              Container(
-                color: Colors.blue,
-              ),
-              Container(
-                color: Colors.orange,
-              )
+            children: const [
+              HomeScreen(),
+            ProductScreen(),
+              CategoryScreen(),
+              AccountScreen()
             ],
           ),
         ),
@@ -52,8 +50,8 @@ class DashboardScreen extends StatelessWidget {
             },
             items: const[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.auto_awesome), label: 'Products'),
               BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
-              BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'Menu'),
               BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: 'Account')
             ],
           ),
