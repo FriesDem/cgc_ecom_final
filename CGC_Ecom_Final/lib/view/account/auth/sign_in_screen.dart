@@ -1,95 +1,140 @@
 import 'package:cgc_ecom_final/component/input_outline_button.dart';
 import 'package:cgc_ecom_final/component/input_text_button.dart';
 import 'package:cgc_ecom_final/component/input_text_field.dart';
+import 'package:cgc_ecom_final/controller/controllers.dart';
+import 'package:cgc_ecom_final/extension/string_extension.dart';
 import 'package:cgc_ecom_final/view/account/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:  [
-            const Spacer(),
-            const Text("Welcome,",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold)),
-            const Text(
-              "Sign in & join the Coucil!",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 1.2),
-            ),
-            const Spacer(flex: 3),
-            const InputTextField(
-              title: 'Email',
-            ),
-            const SizedBox(height: 10),
-            const InputTextField(
-              title: 'Password',
-              obsecureText: true,
-            ),
-            const SizedBox(
-              height: 10
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-              InkWell(
-                onTap: (){},
-                child: const Text(""
-                    "Forgot Password",
-                style: TextStyle(
-                  color: Colors.red,
-                    fontSize: 12),
-                ),
-              )
-              ],
-            ),
-            const Spacer(),
-            InputTextButton(title: 'Sign in', onClick: (){},
-            ),
-            const SizedBox(
-                height: 10
-            ),
-            InputOutlineButton(title: 'Back', onClick: (){
-              Navigator.of(context).pop();
-
-            },
-            ),
-            const Spacer(
-              flex: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:   [
-                const Text("New to CGC?"),
-                InkWell(
-                  onTap: (){
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context)=> const SignUpScreen())
-                    );
-                  },
-                  child: const Text("Sign Up",
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children:  [
+              const Spacer(),
+              const Text("Welcome,",
                   style: TextStyle(
-                    color: Colors.blue
-                  ),),
-
+                      color: Colors.black,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold)),
+              const Text(
+                "Sign in & join the Coucil!",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.2),
+              ),
+              const Spacer(flex: 3),
+               InputTextField(
+                title: 'Email',
+                textEditingController: emailController,
+                validation: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "This field cannot be empty";
+                  } else if (!value.isValidEmail) {
+                    return "Please enter a valid email";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 10),
+               InputTextField(
+                title: 'Password',
+                obsecureText: true,
+                 textEditingController: passwordController,
+                 validation: (String? value) {
+                   if (value == null || value.isEmpty) {
+                     return "This field cannot be empty";
+                   }
+                   return null;
+                 },
+              ),
+              const SizedBox(
+                height: 10
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                InkWell(
+                  onTap: (){},
+                  child: const Text(""
+                      "Forgot Password",
+                  style: TextStyle(
+                    color: Colors.red,
+                      fontSize: 12),
+                  ),
                 )
-              ],
-            ),
-            const SizedBox(height: 10)
-          ],
+                ],
+              ),
+              const Spacer(),
+              InputTextButton(title: 'Sign in', onClick: (){
+                if(_formKey.currentState!.validate()){
+                  authController.signIn(email: emailController.text, password: passwordController.text);
+                }
+              },
+              ),
+              const SizedBox(
+                  height: 10
+              ),
+              InputOutlineButton(title: 'Back', onClick: (){
+                Navigator.of(context).pop();
+
+              },
+              ),
+              const Spacer(
+                flex: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:   [
+                  const Text("New to CGC?"),
+                  InkWell(
+                    onTap: (){
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context)=> const SignUpScreen())
+                      );
+                    },
+                    child: const Text("Sign Up",
+                    style: TextStyle(
+                      color: Colors.blue
+                    ),),
+
+                  )
+                ],
+              ),
+              const SizedBox(height: 10)
+            ],
+          ),
         ),
       )),
     );

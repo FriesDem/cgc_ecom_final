@@ -4,6 +4,8 @@ import 'package:cgc_ecom_final/controller/home_controller.dart';
 import 'package:cgc_ecom_final/controller/product_controller.dart';
 import 'package:get/get.dart';
 
+import '../../controller/auth_controller.dart';
+
 class DashboardBinding extends Bindings {
   @override
   void dependencies() {
@@ -11,6 +13,7 @@ class DashboardBinding extends Bindings {
     Get.put(HomeController());
     Get.put(ProductController());
     Get.put(CategoryController());
+    Get.put(AuthController());
   }
 
 }
