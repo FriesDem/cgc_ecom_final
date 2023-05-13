@@ -4,8 +4,7 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product",
-    "description": ""
+    "displayName": "Product"
   },
   "options": {
     "draftAndPublish": true
@@ -17,14 +16,14 @@
       "required": true
     },
     "images": {
-      "type": "media",
-      "multiple": true,
-      "required": true,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
     },
-    "Description": {
+    "description": {
       "type": "text",
       "default": "no description"
     },

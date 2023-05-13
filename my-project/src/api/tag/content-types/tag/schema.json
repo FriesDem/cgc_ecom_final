@@ -11,11 +11,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "Price": {
+    "price": {
       "type": "decimal",
       "required": true
     },
