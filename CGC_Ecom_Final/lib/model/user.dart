@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
-part 'user.g.dart';
+
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 

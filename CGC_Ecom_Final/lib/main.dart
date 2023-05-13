@@ -20,7 +20,7 @@ void main() async {
   Hive.registerAdapter(AdBannerAdapter());
   Hive.registerAdapter(CategoryAdapter());
   Hive.registerAdapter(ProductAdapter());
-  Hive.registerAdapter(UserAdapter());
+
 
   configLoading();
   runApp(const MyApp());
